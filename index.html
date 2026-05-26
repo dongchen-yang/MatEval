@@ -129,10 +129,11 @@
     <figure class="figure-large">
       <img src="static/images/mateval_vs_openrooms.jpg" alt="Comparison of MatEval and OpenRooms renderings.">
       <figcaption>
-        <strong>MatEval (ours) vs. OpenRooms.</strong>
-        Scenes are curated from 3D-FRONT (left) and Bitterli (middle). Compared to
-        OpenRooms (right), our dataset features more diverse and photorealistic
-        furniture textures.
+        <strong>Comparison between MatEval (ours) and OpenRooms.</strong>
+        MatEval includes scenes curated from the 3D-FRONT (left) and Bitterli (middle)
+        datasets. Compared with OpenRooms (right), our dataset features furniture with
+        more diverse and photorealistic material textures, leading to richer visual
+        variety across indoor scenes.
       </figcaption>
     </figure>
   </div>
@@ -158,11 +159,25 @@
     <figure class="figure-large">
       <img src="static/images/pipeline_updated.svg" alt="Pipeline for lifting 2D materials to 3D.">
       <figcaption>
-        <strong>Overview of the pipeline to lift 2D materials to 3D.</strong>
-        For each object, the nearest-neighbor pipeline projects 2D material estimates to
-        a partial point cloud, fills unobserved regions by NN lookup, and projects to UV space.
-        The texture-generation pipeline projects albedo to a partial UV atlas, then uses TEXGen
-        to inpaint the unobserved regions.
+        <strong>Overview of pipeline to lift 2D materials to 3D.</strong>
+        We lift 2D estimations {<em>a</em>,&thinsp;<em>m</em>,&thinsp;<em>r</em>} to 3D
+        in UV space for each object <em>i</em>. For the nearest neighbor approach:
+        (1)&nbsp;map estimated 2D material properties
+        {<em>a</em>,&thinsp;<em>m</em>,&thinsp;<em>r</em>} to a point cloud
+        <em>p</em><sub>partial</sub><sup>{<em>a</em>,<em>m</em>,<em>r</em>}</sup>
+        and fill unobserved regions with nearest neighbor lookup to get
+        <em>p</em><sub>nn</sub><sup>{<em>a</em>,<em>m</em>,<em>r</em>}</sup>,
+        and (2)&nbsp;project
+        <em>p</em><sub>nn</sub><sup>{<em>a</em>,<em>m</em>,<em>r</em>}</sup>
+        to UV space UV<sub>nn</sub><sup>{<em>a</em>,<em>m</em>,<em>r</em>}</sup>.
+        For the texture generation approach: (1)&nbsp;map the albedo and object mask from
+        camera space to UV space UV<sub>partial</sub><sup>{<em>a</em>}</sup> and
+        UV<sub>partial</sub><sup><em>M<sub>i</sub></em></sup>,
+        (2)&nbsp;obtain the position map and mask map
+        UV<sub>full</sub><sup><em>M<sub>i</sub></em></sup>
+        from the 3D model of the object <em>G<sub>i</sub></em>
+        (3)&nbsp;apply TEXGen to fill unobserved regions and obtain
+        UV<sub>texgen</sub><sup>{<em>a</em>}</sup>.
       </figcaption>
     </figure>
   </div>
@@ -208,19 +223,20 @@
     <figure class="figure-large">
       <img src="static/images/qualitative_original_view.jpg" alt="Qualitative comparisons on original camera view.">
       <figcaption>
-        <strong>Original-view comparisons on 3D-FRONT.</strong>
-        MonoIR baselines (last three columns) recover diverse material textures &mdash; patterns
-        on tables, beds, and wall pictures &mdash; and avoid local-minima failures of DiffProcMat
-        (e.g., bed-stripe orientation in columns 2&ndash;3).
+        <strong>Qualitative comparisons on the original camera view on 3D-FRONT scenes.</strong>
+        &ldquo;PSDR-Room<sup>*</sup>&rdquo; indicates the PSDR-Room baseline using meshes
+        segmented by PartField. Superscripts denote which material channels are estimated
+        by MonoIR methods. MonoIR methods (last 3 columns) recover diverse material
+        textures and avoid the local minima issue seen in DiffProcMat (2nd and 3rd columns).
       </figcaption>
     </figure>
 
     <figure class="figure-large">
       <img src="static/images/overlay_compare.jpg" alt="Novel-view albedo on unobserved regions.">
       <figcaption>
-        <strong>Novel-view albedo on unobserved regions.</strong>
-        Darkened regions were already observed in the input view; lit regions are unobserved.
-        TEXGen produces plausible textures for the previously unseen parts of each object.
+        <strong>Qualitative comparison of aligned albedo for novel view renderings on 3D-FRONT scenes.</strong>
+        Darkened regions are previously observed regions. TEXGen generates reasonable
+        textures for unobserved regions.
       </figcaption>
     </figure>
 
@@ -230,17 +246,18 @@
       <img src="static/images/mirror_compare.jpg" alt="Mirror region failures.">
       <figcaption>
         <strong>Mirror region failures.</strong>
-        All baselines struggle with mirrors. DiffProcMat assigns a median color; MonoIR
-        bakes the reflected scene content into the recovered albedo.
+        All baselines struggle with mirrors. In this scene from the Bitterli dataset,
+        for the mirror on the closet, DiffProcMat assigns a median color and MonoIR
+        produces a &ldquo;baked in&rdquo; appearance.
       </figcaption>
     </figure>
 
     <figure class="figure-large">
       <img src="static/images/texgen_noise.jpg" alt="TEXGen noise issues on featureless regions.">
       <figcaption>
-        <strong>TEXGen noise on featureless regions.</strong>
-        With only small slivers of a ceiling observed, TEXGen sometimes produces noisy
-        textures across those large unobserved areas.
+        <strong>TEXGen noise issues.</strong>
+        The darkened regions are previously observed regions. TEXGen generates noise in
+        featureless regions (e.g., ceilings).
       </figcaption>
     </figure>
   </div>
