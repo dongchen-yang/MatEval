@@ -90,12 +90,74 @@ body {
   margin: 0 auto 1rem auto;
 }
 
-.teaser figcaption {
+.teaser figcaption,
+.figure-large figcaption {
   text-align: justify;
   font-size: 0.95rem;
   line-height: 1.5;
   color: #333;
   margin-top: 1rem;
+}
+
+.figure-large {
+  margin: 1.5rem 0 2rem 0;
+  text-align: center;
+}
+
+.figure-large img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+}
+
+.table-wrap {
+  margin: 1.5rem auto 0 auto;
+  max-width: 720px;
+}
+
+.quant-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.quant-table th,
+.quant-table td {
+  padding: 0.55rem 0.85rem;
+  text-align: left;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.quant-table th {
+  font-weight: 600;
+  border-bottom: 2px solid #1a1a1a;
+  background: #fafafa;
+}
+
+.quant-table td:last-child,
+.quant-table th:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.quant-table tr.upper-bound {
+  background: #f7f7ff;
+  font-style: italic;
+  color: #444;
+}
+
+.table-note {
+  font-size: 0.82rem;
+  color: #666;
+  margin-top: 0.6rem;
+  text-align: center;
+}
+
+.limitations-header {
+  margin-top: 2.5rem !important;
+  color: #6b3a3a;
 }
 
 pre.bibtex {

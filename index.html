@@ -113,6 +113,139 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Benchmark Dataset</h2>
+    <div class="content has-text-justified">
+      <p>
+        MatEval consists of <strong>180 scenes from 3D-FRONT</strong> and
+        <strong>4 high-quality scenes from Bitterli</strong>. Each scene provides one
+        original camera view plus four novel views (5&deg; camera-center rotations),
+        with ground-truth RGB, albedo, and part-level segmentation. Compared with
+        OpenRooms, our scenes use professionally designed 3D-FUTURE furniture, are
+        more densely populated (13.2 objects/scene vs. 9.4), and look more photorealistic.
+      </p>
+    </div>
+    <figure class="figure-large">
+      <img src="static/images/mateval_vs_openrooms.jpg" alt="Comparison of MatEval and OpenRooms renderings.">
+      <figcaption>
+        <strong>MatEval (ours) vs. OpenRooms.</strong>
+        Scenes are curated from 3D-FRONT (left) and Bitterli (middle). Compared to
+        OpenRooms (right), our dataset features more diverse and photorealistic
+        furniture textures.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Methods</h2>
+    <div class="content has-text-justified">
+      <p>We evaluate three families of baselines:</p>
+      <ul>
+        <li><strong>DiffProcMat</strong> &mdash; differentiable procedural materials (a modified PSDR-Room).</li>
+        <li><strong>MonoIR + NN</strong> &mdash; monocular inverse rendering, unobserved regions filled by nearest-neighbor lookup.</li>
+        <li><strong>MonoIR + TEXGen</strong> &mdash; monocular inverse rendering, unobserved regions filled by TEXGen.</li>
+      </ul>
+      <p>
+        MonoIR variants use <em>ColorfulShading</em>, <em>RGBX</em>, or <em>Marigold</em> to
+        estimate camera-space materials, which are then projected onto the 3D geometry.
+        All baselines run under a three-stage framework: material initialization &rarr;
+        light initialization &rarr; joint optimization.
+      </p>
+    </div>
+    <figure class="figure-large">
+      <img src="static/images/pipeline_updated.svg" alt="Pipeline for lifting 2D materials to 3D.">
+      <figcaption>
+        <strong>Overview of the pipeline to lift 2D materials to 3D.</strong>
+        For each object, the nearest-neighbor pipeline projects 2D material estimates to
+        a partial point cloud, fills unobserved regions by NN lookup, and projects to UV space.
+        The texture-generation pipeline projects albedo to a partial UV atlas, then uses TEXGen
+        to inpaint the unobserved regions.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Key Finding</h2>
+    <div class="content has-text-justified">
+      <p>
+        <strong>Single-view inverse rendering substantially outperforms procedural-material
+        optimization.</strong> On albedo recovery from the original camera view (3D-FRONT),
+        the best MonoIR baseline reaches PSNR <strong>19.40</strong> versus
+        <strong>13.60</strong> for the strongest DiffProcMat baseline. With ground-truth
+        albedo as input, the same lifting pipeline reaches <strong>32.98</strong>,
+        showing how much headroom remains for the 2D estimators themselves.
+      </p>
+    </div>
+    <div class="table-wrap">
+      <table class="quant-table">
+        <thead>
+          <tr><th>Method family</th><th>Best baseline</th><th>Albedo PSNR &uarr;</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>DiffProcMat</td><td>PSDR-Room</td><td>13.60</td></tr>
+          <tr><td>MonoIR + NN</td><td>RGBX<sup>a</sup></td><td>19.40</td></tr>
+          <tr><td>MonoIR + TEXGen</td><td>RGBX<sup>a</sup></td><td>19.71</td></tr>
+          <tr class="upper-bound"><td colspan="2">Upper bound (GT albedo &rarr; NN)</td><td>32.98</td></tr>
+        </tbody>
+      </table>
+      <p class="table-note">
+        3D-FRONT, original camera view, unaligned albedo. See the paper for full results
+        across RGB, novel views, and scale-aligned albedo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
+
+    <figure class="figure-large">
+      <img src="static/images/qualitative_original_view.jpg" alt="Qualitative comparisons on original camera view.">
+      <figcaption>
+        <strong>Original-view comparisons on 3D-FRONT.</strong>
+        MonoIR baselines (last three columns) recover diverse material textures &mdash; patterns
+        on tables, beds, and wall pictures &mdash; and avoid local-minima failures of DiffProcMat
+        (e.g., bed-stripe orientation in columns 2&ndash;3).
+      </figcaption>
+    </figure>
+
+    <figure class="figure-large">
+      <img src="static/images/overlay_compare.jpg" alt="Novel-view albedo on unobserved regions.">
+      <figcaption>
+        <strong>Novel-view albedo on unobserved regions.</strong>
+        Darkened regions were already observed in the input view; lit regions are unobserved.
+        TEXGen produces plausible textures for the previously unseen parts of each object.
+      </figcaption>
+    </figure>
+
+    <h3 class="title is-4 has-text-centered limitations-header">Limitations</h3>
+
+    <figure class="figure-large">
+      <img src="static/images/mirror_compare.jpg" alt="Mirror region failures.">
+      <figcaption>
+        <strong>Mirror region failures.</strong>
+        All baselines struggle with mirrors. DiffProcMat assigns a median color; MonoIR
+        bakes the reflected scene content into the recovered albedo.
+      </figcaption>
+    </figure>
+
+    <figure class="figure-large">
+      <img src="static/images/texgen_noise.jpg" alt="TEXGen noise issues on featureless regions.">
+      <figcaption>
+        <strong>TEXGen noise on featureless regions.</strong>
+        With only small slivers of a ceiling observed, TEXGen sometimes produces noisy
+        textures across those large unobserved areas.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
 <section class="section" id="bibtex">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">BibTeX</h2>
