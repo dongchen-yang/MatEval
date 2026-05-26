@@ -100,8 +100,16 @@ body {
 }
 
 .figure-large {
-  margin: 1.5rem 0 2rem 0;
+  margin: 2rem 0 4rem 0;
   text-align: center;
+}
+
+.figure-large + .figure-large {
+  margin-top: 4rem;
+}
+
+.figure-large figcaption {
+  margin-bottom: 0.5rem;
 }
 
 .figure-large img {
