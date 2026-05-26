@@ -27,6 +27,21 @@ body {
   color: #555;
 }
 
+.publication-venue {
+  margin-top: 0.75rem;
+}
+
+.venue-badge {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #1a1a1a;
+  border: 1.5px solid #1a1a1a;
+  border-radius: 999px;
+  padding: 0.25rem 0.85rem;
+}
+
 .publication-links {
   margin-top: 1.5rem;
 }
