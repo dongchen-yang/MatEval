@@ -46,6 +46,23 @@ body {
   color: #fff;
 }
 
+.publication-links .button.is-coming-soon {
+  background: #5a5a5a;
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+.publication-links .button.is-coming-soon:hover {
+  background: #5a5a5a;
+}
+
+.coming-soon-tag {
+  font-size: 0.78em;
+  opacity: 0.75;
+  margin-left: 0.15em;
+  font-weight: normal;
+}
+
 .teaser {
   margin: 0 auto;
   text-align: center;
