@@ -117,6 +117,12 @@ body {
   max-width: 720px;
 }
 
+.table-scroll {
+  margin: 1.5rem auto 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .quant-table {
   width: 100%;
   border-collapse: collapse;
@@ -146,6 +152,74 @@ body {
   background: #f7f7ff;
   font-style: italic;
   color: #444;
+}
+
+.quant-table-full {
+  min-width: 760px;
+  font-size: 0.88rem;
+}
+
+.quant-table-full th,
+.quant-table-full td {
+  padding: 0.4rem 0.6rem;
+}
+
+.quant-table-full thead th {
+  text-align: center;
+  border-bottom: 1px solid #cfcfcf;
+}
+
+.quant-table-full thead tr:last-child th {
+  border-bottom: 2px solid #1a1a1a;
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: #333;
+}
+
+.quant-table-full th.group-head {
+  background: #f2f2f5;
+  border-bottom: 1px solid #cfcfcf;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.quant-table-full tbody td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.quant-table-full tbody td:first-child {
+  text-align: left;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.quant-table-full tr.family-row td {
+  background: #fafafa;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 1px solid #1a1a1a;
+  padding-top: 0.55rem;
+  padding-bottom: 0.4rem;
+  color: #1a1a1a;
+}
+
+.quant-table-full td.best {
+  font-weight: 700;
+  color: #0a0a0a;
+}
+
+.quant-table-full td.second {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+}
+
+.underline-demo {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
 }
 
 .table-note {
