@@ -87,7 +87,7 @@ body {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 0 auto 1rem auto;
+  margin: 0 auto;
 }
 
 .teaser figcaption,
@@ -96,7 +96,7 @@ body {
   font-size: 0.95rem;
   line-height: 1.5;
   color: #333;
-  margin-top: 1rem;
+  margin-top: 0.35rem;
 }
 
 .figure-large {
