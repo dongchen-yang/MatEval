@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MatEval: Evaluating Indoor 3D Scene Material Recovery from a Single Image</title>
+  <meta name="description" content="A benchmark for material recovery in the single-image-to-scene task for indoor 3D scenes.">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.4/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title is-2 publication-title">
+        MatEval: Evaluating Indoor 3D Scene<br>
+        Material Recovery from a Single Image
+      </h1>
+
+      <div class="is-size-5 publication-authors">
+        <span class="author-block"><a href="#">Dongchen Yang</a>,</span>
+        <span class="author-block"><a href="#">Manolis Savva</a></span>
+      </div>
+
+      <div class="is-size-6 publication-affiliations">
+        <span class="affiliation-block">Simon Fraser University</span>
+      </div>
+
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="#" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><i class="ai ai-paper"></i></span>
+            <span>Paper</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="#" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><i class="ai ai-arxiv"></i></span>
+            <span>arXiv</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="#" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><i class="fab fa-github"></i></span>
+            <span>Code</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="#" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><i class="fas fa-database"></i></span>
+            <span>Dataset</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="#bibtex" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><i class="fas fa-quote-left"></i></span>
+            <span>BibTeX</span>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <figure class="teaser">
+      <img src="static/images/problem_statement.svg" alt="Overview of the material recovery problem.">
+      <figcaption>
+        <strong>Overview of our problem statement.</strong>
+        The input is a single-view RGB image
+        <em>I</em><sub>0</sub> and the geometry of the scene <em>G</em>.
+        To focus on material recovery, we use ground-truth geometry, factoring out geometric errors.
+        The output is the reconstructed lighting <em>L</em>(<em>p</em>,<em>e</em>) and the
+        recovered procedural materials <em>M</em>(&theta;) or image-based material
+        UV<sup>{a, m, r}</sup> of the scene, which we render to images
+        <em>I</em><sub>DiffProcMat</sub> and <em>I</em><sub>MonoIR</sub> respectively.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Abstract</h2>
+    <div class="content has-text-justified">
+      <p>
+        Converting a single image to a 3D scene with geometry, materials, and lighting
+        is a challenging problem. While geometry reconstruction from a single view has
+        been extensively studied, material recovery for the single-photo-to-scene task
+        remains underexplored. Recent advances in differentiable procedural materials,
+        inverse rendering, and texture generation can be potentially applied to this
+        task. However, they have not been systematically evaluated in a benchmark.
+      </p>
+      <p>
+        In this project, we establish a comprehensive benchmark for material recovery
+        in the single-image-to-scene task. We assume ground-truth 3D geometry as input
+        to isolate material estimation from geometric error. We evaluate three families
+        of methods inspired by recent state-of-the-art approaches in inverse rendering,
+        texture generation, and single-image-to-scene.
+      </p>
+      <p>
+        Our results show that single-view inverse rendering baselines outperform
+        procedural material baselines (19.40 vs 13.60 in PSNR for albedo on original
+        views), highlighting the strong potential of methods based on single-view
+        inverse rendering for material recovery in the single-image-to-scene task.
+        We will release the full dataset, evaluation code, and baseline implementations
+        to support future work.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">BibTeX</h2>
+    <pre class="bibtex"><code>@inproceedings{yang2026mateval,
+  title     = {MatEval: Evaluating Indoor 3D Scene Material Recovery from a Single Image},
+  author    = {Yang, Dongchen and Savva, Manolis},
+  booktitle = {TODO},
+  year      = {2026}
+}</code></pre>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4 has-text-centered">Acknowledgements</h2>
+    <div class="content has-text-justified">
+      <p><em>TODO: acknowledgements text.</em></p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container has-text-centered">
+    <p class="is-size-7">
+      Website template adapted from
+      <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+    </p>
+  </div>
+</footer>
+
+<script src="static/js/index.js"></script>
+</body>
+</html>
