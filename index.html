@@ -170,103 +170,34 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Quantitative Results</h2>
+    <h2 class="title is-3 has-text-centered">Key Finding</h2>
     <div class="content has-text-justified">
       <p>
         <strong>Single-view inverse rendering substantially outperforms procedural-material
-        optimization.</strong> On albedo recovery from the original camera view of 3D-FRONT,
-        MonoIR baselines reach PSNR <strong>19.40&ndash;19.71</strong> versus
+        optimization.</strong> On albedo recovery from the original camera view (3D-FRONT),
+        the best MonoIR baseline reaches PSNR <strong>19.40</strong> versus
         <strong>13.60</strong> for the strongest DiffProcMat baseline. With ground-truth
         albedo as input, the same lifting pipeline reaches <strong>32.98</strong>,
         showing how much headroom remains for the 2D estimators themselves.
       </p>
     </div>
-
-    <div class="table-scroll">
-      <table class="quant-table quant-table-full">
+    <div class="table-wrap">
+      <table class="quant-table">
         <thead>
-          <tr>
-            <th rowspan="2">Method</th>
-            <th colspan="4" class="group-head">Albedo</th>
-            <th colspan="4" class="group-head">Aligned Albedo</th>
-          </tr>
-          <tr>
-            <th>MSE (10<sup>-3</sup>) &darr;</th>
-            <th>PSNR &uarr;</th>
-            <th>SSIM &uarr;</th>
-            <th>LPIPS &darr;</th>
-            <th>MSE (10<sup>-3</sup>) &darr;</th>
-            <th>PSNR &uarr;</th>
-            <th>SSIM &uarr;</th>
-            <th>LPIPS &darr;</th>
-          </tr>
+          <tr><th>Method family</th><th>Best baseline</th><th>Albedo PSNR &uarr;</th></tr>
         </thead>
         <tbody>
-          <tr class="family-row"><td colspan="9"><em>DiffProcMat</em></td></tr>
-          <tr>
-            <td>PSDR-Room</td>
-            <td>46.911</td><td>13.60</td><td>0.6277</td><td>0.4303</td>
-            <td>20.290</td><td>17.59</td><td>0.6602</td><td>0.3968</td>
-          </tr>
-          <tr>
-            <td>PSDR-Room<sup>*</sup></td>
-            <td>49.023</td><td>13.41</td><td>0.6213</td><td>0.4386</td>
-            <td>21.533</td><td>17.28</td><td>0.6543</td><td>0.4045</td>
-          </tr>
-
-          <tr class="family-row"><td colspan="9"><em>MonoIR + NN</em></td></tr>
-          <tr>
-            <td>GT<sup>a</sup></td>
-            <td class="best">0.848</td><td class="best">32.98</td><td class="best">0.9225</td><td class="best">0.1051</td>
-            <td class="best">0.809</td><td class="best">33.10</td><td class="best">0.9227</td><td class="best">0.1051</td>
-          </tr>
-          <tr>
-            <td>ColorfulShading<sup>a</sup></td>
-            <td>19.555</td><td>17.54</td><td>0.7873</td><td>0.3130</td>
-            <td>8.474</td><td>21.30</td><td>0.7965</td><td>0.2925</td>
-          </tr>
-          <tr>
-            <td>RGBX<sup>a</sup></td>
-            <td>16.809</td><td>19.40</td><td>0.7621</td><td>0.2487</td>
-            <td>9.926</td><td>21.64</td><td>0.7693</td><td>0.2428</td>
-          </tr>
-          <tr>
-            <td>Marigold<sup>a</sup></td>
-            <td>28.279</td><td>15.84</td><td>0.6993</td><td>0.3220</td>
-            <td>7.855</td><td>21.63</td><td>0.7212</td><td>0.2966</td>
-          </tr>
-
-          <tr class="family-row"><td colspan="9"><em>MonoIR + TEXGen</em></td></tr>
-          <tr>
-            <td>GT<sup>a</sup></td>
-            <td class="second">1.399</td><td class="second">29.07</td><td class="second">0.8693</td><td class="second">0.1348</td>
-            <td class="second">1.253</td><td class="second">29.73</td><td class="second">0.8683</td><td class="second">0.1349</td>
-          </tr>
-          <tr>
-            <td>ColorfulShading<sup>a</sup></td>
-            <td>17.573</td><td>18.01</td><td>0.7219</td><td>0.2936</td>
-            <td>8.762</td><td>21.06</td><td>0.7398</td><td>0.2765</td>
-          </tr>
-          <tr>
-            <td>RGBX<sup>a</sup></td>
-            <td>15.721</td><td>19.71</td><td>0.6998</td><td>0.2700</td>
-            <td>10.480</td><td>21.20</td><td>0.7107</td><td>0.2637</td>
-          </tr>
-          <tr>
-            <td>Marigold<sup>a</sup></td>
-            <td>24.599</td><td>16.45</td><td>0.6377</td><td>0.3091</td>
-            <td>8.651</td><td>21.08</td><td>0.6677</td><td>0.2863</td>
-          </tr>
+          <tr><td>DiffProcMat</td><td>PSDR-Room</td><td>13.60</td></tr>
+          <tr><td>MonoIR + NN</td><td>RGBX<sup>a</sup></td><td>19.40</td></tr>
+          <tr><td>MonoIR + TEXGen</td><td>RGBX<sup>a</sup></td><td>19.71</td></tr>
+          <tr class="upper-bound"><td colspan="2">Upper bound (GT albedo &rarr; NN)</td><td>32.98</td></tr>
         </tbody>
       </table>
+      <p class="table-note">
+        3D-FRONT, original camera view, unaligned albedo. See the paper for full results
+        across RGB, novel views, and scale-aligned albedo.
+      </p>
     </div>
-    <p class="table-note">
-      Quantitative comparison on original camera views for albedo on 3D-FRONT scenes.
-      <strong>Bold</strong> is best, <span class="underline-demo">underline</span> is second-best.
-      &ldquo;PSDR-Room<sup>*</sup>&rdquo; uses PartField segmentations; superscripts
-      (<em>a</em>, <em>m</em>, <em>r</em>) denote which MonoIR-estimated channels are used.
-      See the paper for RGB metrics and novel-view results.
-    </p>
   </div>
 </section>
 

@@ -127,19 +127,30 @@ body {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
+  border: 1px solid #1a1a1a;
 }
 
 .quant-table th,
 .quant-table td {
-  padding: 0.55rem 0.85rem;
+  padding: 0.6rem 0.9rem;
   text-align: left;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid #b8b8b8;
+  border-right: 1px solid #d8d8d8;
+}
+
+.quant-table th:last-child,
+.quant-table td:last-child {
+  border-right: none;
+}
+
+.quant-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .quant-table th {
   font-weight: 600;
   border-bottom: 2px solid #1a1a1a;
-  background: #fafafa;
+  background: #f0f0f3;
 }
 
 .quant-table td:last-child,
@@ -149,9 +160,14 @@ body {
 }
 
 .quant-table tr.upper-bound {
-  background: #f7f7ff;
+  background: #f5f5fa;
   font-style: italic;
   color: #444;
+  border-top: 2px solid #1a1a1a;
+}
+
+.quant-table tr.upper-bound td {
+  border-top: 2px solid #1a1a1a;
 }
 
 .quant-table-full {
